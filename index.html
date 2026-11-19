@@ -1,60 +1,108 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#4f46e5">
-  <meta name="description" content="تطبيق المعهد التفاعلي لتعلم اللغة الإنجليزية">
-  <title>معهد الإنجليزية التفاعلي</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="تطبيق تعليم اللغة الإنجليزية التفاعلي - Book 1" />
+  <title>معهد اللغات | Book 1</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232563eb'/%3E%3Ctext x='50' y='64' font-size='48' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EB1%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
+  <div class="app-shell">
+    <!-- الشريط العلوي -->
+    <header class="app-header">
+      <div class="header-right">
+        <button id="back-btn" class="icon-btn hidden" aria-label="العودة للوحدات">
+          <span>&#8594;</span>
+        </button>
+        <div class="header-titles">
+          <h1 id="header-title">Book 1 — المنهج التفاعلي</h1>
+        </div>
+      </div>
 
-  <!-- الهيدر -->
-  <header class="app-header">
-    <button id="backBtn" class="icon-btn hidden" aria-label="رجوع">
-      <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M9 6l6 6-6 6" transform="scale(-1,1) translate(-24,0)"/></svg>
-    </button>
-    <h1 id="appTitle">📚 معهد الإنجليزية</h1>
-    <button id="themeToggle" class="icon-btn" aria-label="تبديل الوضع الليلي">
-      <span id="themeIcon">🌙</span>
-    </button>
-  </header>
+      <div class="header-left">
+        <span id="total-points-badge" class="points-badge" title="نقاطك">0 نقطة</span>
+        <button id="theme-toggle" class="icon-btn" aria-label="تبديل الوضع الليلي">
+          🌙
+        </button>
+      </div>
+    </header>
 
-  <!-- شريط التقدم العام -->
-  <div class="progress-banner" id="progressBanner">
-    <span>تقدّمك في Book 1</span>
-    <div class="progress-track"><div class="progress-fill" id="overallProgress"></div></div>
-    <span id="progressText">0%</span>
+    <!-- الشاشة الرئيسية: قائمة الوحدات والدروس -->
+    <main id="home-view" class="view active">
+      <section class="progress-hero card">
+        <div class="progress-hero-top">
+          <div>
+            <h2>تقدمك في Book 1</h2>
+            <p id="overall-progress-text" class="muted-text">0 من 4 دروس مكتملة</p>
+          </div>
+          <div class="hero-icon">🎓</div>
+        </div>
+        <div class="progress-track">
+          <div id="overall-progress-bar" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </section>
+
+      <section id="units-container" class="units-list" aria-live="polite">
+        <div class="loading-state">جاري تحميل الوحدات...</div>
+      </section>
+    </main>
+
+    <!-- شاشة الدرس: التبويبات الثلاثة -->
+    <main id="lesson-view" class="view hidden">
+      <div class="lesson-banner card">
+        <span id="lesson-unit-label" class="unit-pill">Unit 1</span>
+        <h2 id="lesson-title-en" class="ltr-text">Lesson Title</h2>
+        <p id="lesson-title-ar" class="muted-text">عنوان الدرس</p>
+      </div>
+
+      <nav class="tabs-bar" role="tablist" aria-label="أقسام الدرس">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="lesson">
+          📖 الشرح والمفردات
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="quiz">
+          ✍️ التمارين
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tasks">
+          ✅ المهام والتقدم
+        </button>
+      </nav>
+
+      <!-- تبويب 1: الشرح والمفردات -->
+      <section id="tab-lesson" class="tab-panel active" role="tabpanel">
+        <div id="grammar-container"></div>
+        <h3 class="section-heading">المفردات الأساسية (اضغط للاستماع 🔊)</h3>
+        <div id="vocab-container" class="vocab-list"></div>
+      </section>
+
+      <!-- تبويب 2: التمارين التفاعلية -->
+      <section id="tab-quiz" class="tab-panel hidden" role="tabpanel">
+        <div id="quiz-container"></div>
+      </section>
+
+      <!-- تبويب 3: المهام اليومية والتقدم -->
+      <section id="tab-tasks" class="tab-panel hidden" role="tabpanel">
+        <div class="card">
+          <h3>المهام اليومية للدرس</h3>
+          <p class="muted-text">أكمل المهام التالية لترسيخ الدرس وكسب نقاط إضافية:</p>
+          <div id="tasks-container" class="tasks-list"></div>
+        </div>
+
+        <div class="card action-card">
+          <button id="complete-lesson-btn" class="primary-btn full-width">
+            تحديد الدرس كمكتمل ✓
+          </button>
+          <button id="reset-progress-btn" class="ghost-btn full-width">
+            إعادة تعيين تقدم الكتاب بالكامل
+          </button>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <!-- عرض الوحدات -->
-  <main id="homeView" class="view"></main>
-
-  <!-- عرض الدرس -->
-  <main id="lessonView" class="view hidden">
-    <div class="lesson-hero">
-      <h2 id="lessonTitle"></h2>
-      <p id="lessonSubtitle"></p>
-    </div>
-
-    <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="learn">📖 الشرح</button>
-      <button class="tab" data-tab="quiz">📝 التمارين</button>
-      <button class="tab" data-tab="tasks">✅ التقدم</button>
-    </nav>
-
-    <section id="tab-learn" class="tab-panel"></section>
-    <section id="tab-quiz" class="tab-panel hidden"></section>
-    <section id="tab-tasks" class="tab-panel hidden"></section>
-  </main>
-
-  <footer class="app-footer">
-    <small>English Institute PWA • MVP v1.0</small>
-  </footer>
-
-  <script src="js/app.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
