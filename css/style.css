@@ -1,0 +1,314 @@
+/* ===== المتغيرات والوضعان ===== */
+:root {
+  --bg: #f5f6fa;
+  --bg-card: #ffffff;
+  --text: #1e2235;
+  --text-muted: #6b7280;
+  --primary: #4f46e5;
+  --primary-soft: #e0e7ff;
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --border: #e5e7eb;
+  --radius: 16px;
+  --shadow: 0 4px 14px rgba(0,0,0,.07);
+}
+
+[data-theme="dark"] {
+  --bg: #0f1117;
+  --bg-card: #1a1d27;
+  --text: #e8eaf2;
+  --text-muted: #9aa1b2;
+  --primary: #818cf8;
+  --primary-soft: #2e3350;
+  --success-soft: #12341f;
+  --danger-soft: #3b1717;
+  --border: #2a2e3d;
+  --shadow: 0 4px 14px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 16px; }
+body {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hidden { display: none !important; }
+[dir="ltr"] { text-align: left; }
+.en { direction: ltr; text-align: left; display: inline-block; }
+
+/* ===== الهيدر ===== */
+.app-header {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+.app-header h1 { font-size: 1.1rem; font-weight: 700; }
+
+.icon-btn {
+  background: var(--primary-soft); color: var(--primary);
+  border: none; border-radius: 12px;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  cursor: pointer; font-size: 1.1rem;
+  transition: transform .15s ease;
+}
+.icon-btn:active { transform: scale(.92); }
+
+/* ===== شريط التقدم ===== */
+.progress-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  font-size: .8rem; color: var(--text-muted);
+}
+.progress-track {
+  flex: 1; height: 8px; border-radius: 99px;
+  background: var(--border); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--primary), #9333ea);
+  border-radius: 99px;
+  transition: width .5s ease;
+}
+
+/* ===== العام ===== */
+.view { padding: 16px; flex: 1; }
+
+.app-footer {
+  text-align: center; padding: 16px;
+  color: var(--text-muted); font-size: .75rem;
+}
+
+/* ===== بطاقات الوحدات والدروس ===== */
+.unit-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.unit-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.unit-badge {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: var(--primary-soft); color: var(--primary);
+  display: grid; place-items: center; font-weight: 800; font-size: 1.1rem;
+}
+.unit-header h2 { font-size: 1.05rem; }
+.unit-header p { font-size: .8rem; color: var(--text-muted); }
+
+.lesson-list { display: flex; flex-direction: column; gap: 10px; }
+
+.lesson-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  min-height: 56px; /* مريح للمس */
+  transition: transform .15s ease, border-color .2s;
+  text-align: right;
+  color: var(--text);
+}
+.lesson-item:active { transform: scale(.98); }
+.lesson-item:hover { border-color: var(--primary); }
+
+.lesson-info strong { display: block; font-size: .95rem; }
+.lesson-info span { font-size: .78rem; color: var(--text-muted); }
+
+.lesson-status { font-size: 1.2rem; }
+
+/* ===== بطل الدرس ===== */
+.lesson-hero {
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  color: #fff; border-radius: var(--radius);
+  padding: 22px 18px; margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.lesson-hero h2 { font-size: 1.2rem; margin-bottom: 6px; }
+.lesson-hero p { font-size: .85rem; opacity: .9; }
+
+/* ===== التبويبات ===== */
+.tabs {
+  display: flex; gap: 6px;
+  background: var(--bg-card);
+  border-radius: 14px; padding: 6px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  position: sticky; top: 70px; z-index: 40;
+}
+.tab {
+  flex: 1; padding: 11px 4px;
+  border: none; border-radius: 10px;
+  background: transparent; color: var(--text-muted);
+  font-family: inherit; font-size: .82rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.tab.active { background: var(--primary); color: #fff; }
+
+.tab-panel { animation: fadeIn .25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ===== المفردات والقواعد ===== */
+.section-title {
+  font-size: 1rem; margin: 18px 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title::after {
+  content: ""; flex: 1; height: 1px; background: var(--border);
+}
+
+.vocab-card {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.vocab-card .en { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+.vocab-card .ar { font-size: .85rem; color: var(--text-muted); }
+.vocab-example { display: block; font-size: .78rem; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+
+.speak-btn {
+  background: var(--primary-soft); color: var(--primary);
+  border: none; border-radius: 50%;
+  width: 44px; height: 44px; flex-shrink: 0;
+  font-size: 1.1rem; cursor: pointer;
+  display: grid; place-items: center;
+  transition: transform .15s;
+}
+.speak-btn:active { transform: scale(.85); }
+
+.grammar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 16px;
+  margin-bottom: 10px;
+}
+.grammar-card h4 { font-size: .95rem; color: var(--primary); margin-bottom: 6px; }
+.grammar-card p { font-size: .88rem; line-height: 1.7; }
+.grammar-card .example-box {
+  background: var(--primary-soft);
+  border-radius: 10px; padding: 10px 12px;
+  margin-top: 10px; font-size: .85rem;
+}
+
+/* ===== الاختبار ===== */
+.quiz-meta {
+  display: flex; justify-content: space-between;
+  font-size: .8rem; color: var(--text-muted); margin-bottom: 10px;
+}
+.quiz-question {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px;
+  margin-bottom: 14px;
+}
+.quiz-question h3 { font-size: .95rem; margin-bottom: 4px; }
+.quiz-question .en { color: var(--primary); font-weight: 600; }
+
+.option-btn {
+  display: block; width: 100%;
+  padding: 13px 14px; margin-top: 8px;
+  border: 1.5px solid var(--border); border-radius: 12px;
+  background: var(--bg); color: var(--text);
+  font-family: inherit; font-size: .9rem;
+  text-align: right; cursor: pointer;
+  transition: all .15s; min-height: 48px;
+}
+.option-btn:active { transform: scale(.98); }
+.option-btn.correct { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+.option-btn.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+.option-btn:disabled { cursor: default; opacity: .95; }
+
+.quiz-feedback {
+  border-radius: 12px; padding: 12px 14px;
+  font-size: .83rem; line-height: 1.6; margin-top: 10px;
+}
+.quiz-feedback.ok { background: var(--success-soft); color: var(--success); }
+.quiz-feedback.no { background: var(--danger-soft); color: var(--danger); }
+
+.quiz-nav { display: flex; gap: 10px; margin-top: 14px; }
+.btn {
+  flex: 1; padding: 14px;
+  border: none; border-radius: 12px;
+  font-family: inherit; font-size: .9rem; font-weight: 700;
+  cursor: pointer; transition: transform .15s;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-ghost { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
+
+/* ===== نتيجة الاختبار ===== */
+.result-card {
+  text-align: center; padding: 26px 18px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.result-emoji { font-size: 3rem; margin-bottom: 8px; }
+.result-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.result-card p { color: var(--text-muted); font-size: .88rem; margin-bottom: 16px; }
+.result-score { font-size: 2rem; font-weight: 800; color: var(--primary); }
+
+/* ===== المهام والتقدم ===== */
+.task-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+}
+.task-card .task-icon { font-size: 1.3rem; }
+.task-card strong { display: block; font-size: .9rem; }
+.task-card span { font-size: .78rem; color: var(--text-muted); }
+.task-card .done { color: var(--success); font-size: 1.2rem; margin-right: auto; }
+
+.points-box {
+  background: var(--primary-soft); color: var(--primary);
+  border-radius: var(--radius); padding: 18px;
+  text-align: center; margin-bottom: 16px;
+}
+.points-box .points-num { font-size: 2rem; font-weight: 800; }
+
+.streak-box {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .85rem;
+}
+.streak-box .fire { font-size: 1.4rem; }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; right: 50%;
+  transform: translateX(50%) translateY(80px);
+  background: var(--text); color: var(--bg);
+  padding: 12px 20px; border-radius: 99px;
+  font-size: .85rem; z-index: 100;
+  opacity: 0; transition: all .3s ease;
+  box-shadow: var(--shadow);
+}
+.toast.show { opacity: 1; transform: translateX(50%) translateY(0); }
+
+/* ===== شاشات صغيرة ===== */
+@media (max-width: 360px) {
+  html { font-size: 15px; }
+  .tab { font-size: .75rem; }
+}
+
+/* ===== تقليل الحركة ===== */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
